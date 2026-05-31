@@ -12,48 +12,31 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   Future<bool> checkLogin() async {
-    return await AuthService.instance
-        .isLogged();
+    return await AuthService.instance.isLogged();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-
-      debugShowCheckedModeBanner:
-          false,
+      debugShowCheckedModeBanner: false,
 
       title: 'UseDev',
 
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
 
       home: FutureBuilder<bool>(
-
         future: checkLogin(),
 
-        builder: (
-          context,
-          snapshot,
-        ) {
-
+        builder: (context, snapshot) {
           if (!snapshot.hasData) {
-
             return const Scaffold(
-              body: Center(
-                child:
-                    CircularProgressIndicator(),
-              ),
+              body: Center(child: CircularProgressIndicator()),
             );
           }
 
-          final logged =
-              snapshot.data ?? false;
+          final logged = snapshot.data ?? false;
 
           if (logged) {
             return const InitialScreen();
@@ -65,3 +48,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// feat: finaliza telas de autenticação e carrinho do checkpoint
